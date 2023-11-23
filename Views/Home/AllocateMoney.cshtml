@@ -1,0 +1,68 @@
+﻿@model Part_2.Models.AllocateMoney
+
+@{
+    ViewBag.Title = "AllocateMoney";
+}
+div class="jumbotron">
+<style>
+    body {
+        background-color: #C628D6;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%23da26c6' points='800 100 0 200 0 800 1600 800 1600 200'/%3E%3Cpolygon fill='%23de25a4' points='800 200 0 400 0 800 1600 800 1600 400'/%3E%3Cpolygon fill='%23e1237f' points='800 300 0 600 0 800 1600 800 1600 600'/%3E%3Cpolygon fill='%23e42259' points='1600 800 800 400 0 800'/%3E%3Cpolygon fill='%23e82130' points='1280 800 800 500 320 800'/%3E%3Cpolygon fill='%23eb3920' points='533.3 800 1066.7 800 800 600'/%3E%3Cpolygon fill='%23EE631F' points='684.1 800 914.3 800 800 700'/%3E%3C/g%3E%3C/svg%3E");
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<h2>Allocate Money</h2>
+<h3 style="color: orangered">Available Money: R @ViewBag.Available</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>AllocateMoney</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.AllocationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AllocationDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AllocationDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ALloocationAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ALloocationAmount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ALloocationAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DisasterId, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (ViewBag.DisasterList != null)
+                {
+                    @Html.DropDownListFor(model => model.DisasterId, (SelectList)ViewBag.DisasterList, new { @class = "form-control" })
+                }
+                @Html.ValidationMessageFor(model => model.DisasterId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,117 @@
+﻿@model Part_2.Models.UserTable
+
+@{
+    ViewBag.Title = "LogIn";
+}
+<div class="jumbotron">
+    <style>
+        body {
+            background-color: #C628D6;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%23da26c6' points='800 100 0 200 0 800 1600 800 1600 200'/%3E%3Cpolygon fill='%23de25a4' points='800 200 0 400 0 800 1600 800 1600 400'/%3E%3Cpolygon fill='%23e1237f' points='800 300 0 600 0 800 1600 800 1600 600'/%3E%3Cpolygon fill='%23e42259' points='1600 800 800 400 0 800'/%3E%3Cpolygon fill='%23e82130' points='1280 800 800 500 320 800'/%3E%3Cpolygon fill='%23eb3920' points='533.3 800 1066.7 800 800 600'/%3E%3Cpolygon fill='%23EE631F' points='684.1 800 914.3 800 800 700'/%3E%3C/g%3E%3C/svg%3E");
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            body {
+                background-color: #f5f5f5;
+                font-family: Arial, sans-serif;
+            }
+
+            .login-container {
+                max-width: 400px;
+                margin: 0 auto;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            }
+
+                .login-container h2 {
+                    text-align: center;
+                    color: #333;
+                }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .control-label {
+                font-weight: bold;
+            }
+
+            .form-control {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                transition: border-color 0.2s;
+            }
+
+                .form-control:focus {
+                    border-color: #007bff;
+                }
+
+            .btn-primary {
+                background-color: #007bff;
+                border: none;
+                color: #fff;
+                padding: 10px 20px;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+                .btn-primary:hover {
+                    background-color: #0056b3;
+                }
+
+            .btn-danger {
+                background-color: #dc3545;
+                border: none;
+                color: #fff;
+                padding: 10px 20px;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+                .btn-danger:hover {
+                    background-color: #c82333;
+                }
+        </style>
+    </head>
+    <body>
+        <div class="login-container">
+            <h2 class="text-center">Log In</h2>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Log In</button>
+                        <a href="/Home/SignUp" class="btn btn-danger">Register</a>
+                    </div>
+                </div>
+            }
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </body>
+</html>

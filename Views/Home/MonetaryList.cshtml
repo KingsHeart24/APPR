@@ -1,0 +1,52 @@
+﻿@model System.Data.DataTable
+@using System.Data
+
+@{
+    ViewBag.Title = "Monetary List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+div class="jumbotron">
+<style>
+    body {
+        background-color: #C628D6;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%23da26c6' points='800 100 0 200 0 800 1600 800 1600 200'/%3E%3Cpolygon fill='%23de25a4' points='800 200 0 400 0 800 1600 800 1600 400'/%3E%3Cpolygon fill='%23e1237f' points='800 300 0 600 0 800 1600 800 1600 600'/%3E%3Cpolygon fill='%23e42259' points='1600 800 800 400 0 800'/%3E%3Cpolygon fill='%23e82130' points='1280 800 800 500 320 800'/%3E%3Cpolygon fill='%23eb3920' points='533.3 800 1066.7 800 800 600'/%3E%3Cpolygon fill='%23EE631F' points='684.1 800 914.3 800 800 700'/%3E%3C/g%3E%3C/svg%3E");
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div class="container">
+    <h2 class="text-center mt-5">Monetary Donations List</h2>
+    <div class="mb-4">
+        <a href="/Home/MonetaryDonations" class="btn btn-success">Add Donation</a>
+    </div>
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Emails</th>
+                    <th scope="col">Donator Name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DataRow row in Model.Rows)
+                {
+                    <tr>
+                        <td>@row["Emails"]</td>
+                        <td>@row["DonatorName"]</td>
+                        <td>@row["Date"]</td>
+                        <td>@row["Amount"]</td>
+                        <td>
+                            <a href="@Url.Action("EditMonetary", new { id = row["MonetaryId"] })" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="@Url.Action("MonentaryDeatils", new { id = row["MonetaryId"] })" class="btn btn-info btn-sm">Details</a>
+                            <a href="@Url.Action("DeletMonetary", new { id = row["MonetaryId"] })" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
